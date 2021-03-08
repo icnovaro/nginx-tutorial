@@ -1,11 +1,23 @@
 version: '3'
 
 services:
-
+  api:
+    restart: always
+    build: ./api
+    environment:
+    - NODE=1
+    ports:
+      - "80"
+  api2:
+    restart: always
+    build: ./api
+    environment:
+    - NODE=2
+    ports:
+      - "80"
   nginx:
     image: nginx:latest
     ports:
       - "80:80"
     volumes:
       - ./conf/initial.conf:/etc/nginx/conf.d/default.conf:ro
-      - ./static/index.html:/var/www/ean/index.html
